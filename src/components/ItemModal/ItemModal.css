@@ -1,12 +1,63 @@
-.modal__content {
+@font-face {
+  font-family: "GroteskBold";
+  src: url("../../vendor/CabinetGrotesk-Bold.otf") format("opentype");
 }
 
-.modal__caption {
-  font-size: 20px;
-  font-weight: 700;
+.modal__item_content {
+  width: 498px;
+  height: 610px;
+
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  padding: 0;
 }
 
-.modal__weather {
+.modal__item_image {
+  width: 498px;
+  height: 498px;
+  display: block;
+  object-fit: cover;
+  padding: 0;
+}
+
+.modal__item_footer {
+  padding: 20px 24px 0 32px;
+  background-color: #ffffff;
+  text-align: left;
+}
+
+.modal__item_caption {
+  font-family: GroteskBold, sans-serif;
   font-size: 20px;
   font-weight: 700;
+  margin: 0 0 12px 0;
+}
+
+.modal__item_weather {
+  font-size: 20px;
+  font-family: GroteskBold, sans-serif;
+  font-weight: 700;
+  margin: 0;
+  margin-top: 8px;
+  padding-bottom: 32px;
+}
+
+.modal__item_close {
+  position: absolute;
+
+  top: 24px;
+  right: 24px;
+  background: transparent;
+  border: none;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.modal__item_close-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  background: transparent;
 }

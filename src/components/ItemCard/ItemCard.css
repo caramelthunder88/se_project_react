@@ -1,3 +1,14 @@
+@font-face {
+  font-family: "Grotesk";
+  src: url("../../vendor/CabinetGrotesk-Medium.otf") format("opentype");
+}
+
+.card__text {
+  font-family: "Grotesk", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
 .card {
   width: 323px;
   position: relative;
@@ -21,6 +32,7 @@
   box-sizing: border-box;
   border-radius: 4px;
   white-space: nowrap;
+  font-family: "Grotesk", sans-serif;
   font-size: 16px;
   line-height: 20px;
   font-weight: 700;

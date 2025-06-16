@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Grotesk";
+  src: url("../../vendor/CabinetGrotesk-Medium.otf") format("opentype");
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -7,6 +12,7 @@
 .header__add-clothes-btn {
   margin: 0 20px 0 auto;
   border: none;
+  font-family: "Grotesk", sans-serif;
   font-size: 20px;
   font-weight: 700;
 }
@@ -23,12 +29,14 @@
 
 .header__date-and-location {
   margin: 0;
+  font-family: "Grotesk", sans-serif;
   font-size: 20px;
   font-weight: 700;
 }
 
 .header__username {
   margin: 0;
+  font-family: "Grotesk", sans-serif;
   font-size: 20px;
   font-weight: 700;
 }
