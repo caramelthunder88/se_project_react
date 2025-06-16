@@ -1,4 +1,5 @@
 import "./ItemModal.css";
+import "../Main/Main.css";
 import iconClose from "../../assets/close 2.png";
 
 function ItemModal({ activeModal, onClose, card }) {
