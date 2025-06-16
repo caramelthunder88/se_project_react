@@ -10,7 +10,7 @@ function Header({ handleAddClick, weatherData }) {
 
   return (
     <header className="header">
-      <img className="header__logo" src={logo} />
+      <img className="header__logo" src={logo} alt="logo" />
       <p className="header__date-and-location">
         {currentDate} {weatherData.city}
       </p>
@@ -18,13 +18,13 @@ function Header({ handleAddClick, weatherData }) {
       <button
         onClick={handleAddClick}
         type="button"
-        className="header__add-clothes-btn "
+        className="header__add-clothes-btn"
       >
         + Add clothes
       </button>
       <div className="header__user-container">
         <p className="header__username">Terrence Tegegne</p>
-        <img src={avatar} alt="User" className="header__avatar"></img>
+        <img src={avatar} alt="User" className="header__avatar" />
       </div>
     </header>
   );
