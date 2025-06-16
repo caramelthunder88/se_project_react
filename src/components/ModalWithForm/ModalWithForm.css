@@ -1,0 +1,142 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0000004d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+}
+
+.modal_opened {
+  visibility: visible;
+}
+
+.modal__content {
+  position: relative;
+  background-color: white;
+  padding: 28px 28px 68px;
+  max-width: 496px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+}
+
+.modal__title {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.modal__close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 72px;
+}
+
+.modal__label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #000;
+  gap: 8px;
+  margin: 0;
+}
+
+.modal__input {
+  border: none;
+  border-bottom: 1px solid #000;
+  outline: none;
+  background-color: transparent;
+  padding: 4px 0;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.modal__label_type_radio {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal__label_type_name {
+  margin-top: 0;
+}
+
+.modal__label_type_image {
+  margin-top: 24px;
+}
+
+.modal__radio-buttons {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  padding: 0;
+  gap: 8px;
+}
+
+.modal__legend {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+}
+
+.modal__label_type_radio {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 14px;
+  margin: 0;
+}
+
+.modal__label_first-radio {
+  margin-top: 12px;
+}
+
+.modal__label_type_radio:not(:last-of-type) {
+  margin-bottom: 8px;
+}
+
+.modal__radio-buttons_type_garment {
+  margin-top: 24px;
+  margin-bottom: 32px;
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__submit {
+  width: 124px;
+  height: 36px;
+  position: absolute;
+  left: 28px;
+  bottom: 36px;
+
+  background-color: #0000004d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+
+  font-size: 16px;
+}

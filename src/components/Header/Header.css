@@ -6,6 +6,9 @@
 
 .header__add-clothes-btn {
   margin: 0 20px 0 auto;
+  border: none;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .header__logo {
@@ -20,8 +23,12 @@
 
 .header__date-and-location {
   margin: 0;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .header__username {
   margin: 0;
+  font-size: 20px;
+  font-weight: 700;
 }
