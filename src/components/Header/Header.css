@@ -15,6 +15,7 @@
   font-family: "Grotesk", sans-serif;
   font-size: 20px;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .header__logo {
