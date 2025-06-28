@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "Grotesk";
+  src: url("../../vendor/CabinetGrotesk-Medium.otf") format("opentype");
+}
+
+.sidebar {
+  display: flex;
+  width: 229px;
+  font-family: "Grotesk", sans-serif;
+  height: 56px;
+  align-items: center;
+  margin-right: 116px;
+
+  gap: 16px;
+  white-space: nowrap; /* Prevents username from wrapping */
+}
+
+.sidebar__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+}
+
+.sidebar__username {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}

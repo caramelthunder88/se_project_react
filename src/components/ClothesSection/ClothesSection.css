@@ -1,0 +1,33 @@
+@font-face {
+  font-family: "Grotesk";
+  src: url("../../vendor/CabinetGrotesk-Medium.otf") format("opentype");
+}
+
+.clothessection {
+  display: flex;
+  flex-direction: column;
+  font-family: "Grotesk", sans-serif;
+  font-weight: 700;
+}
+
+.clothessection__header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+.clothessection__title {
+  font-size: 20px;
+  color: #000000;
+  margin: 0;
+}
+
+.clothessection__button {
+  padding: 8px 12px;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #00000099;
+}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
 import Header from "../Header/Header";
@@ -6,6 +7,7 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 
 import ItemModal from "../ItemModal/ItemModal";
+import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
@@ -24,7 +26,7 @@ function App() {
     isDay: false,
   });
 
-  const [activeModal, setActiveModal] = useState("");
+  const [activeModal, setActiveModal] = useState([]);
   const [selectedCard, setSelectedCard] = useState({});
   const [clothingItems, setClothingItems] = useState(defaultClothingItems);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
@@ -52,6 +54,11 @@ function App() {
     setActiveModal("");
   };
 
+  const handleAddItemModalSumbit = ({ name, imageUrl, weather }) => {
+    setClothingItems([{ name, link: imageUrl, weather }, ...clothingItems]);
+    closeActiveModal();
+  };
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -68,11 +75,29 @@ function App() {
       <div className="page">
         <div className="page__content">
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-          <Main
-            weatherData={weatherData}
-            handleCardClick={handleCardClick}
-            clothingItems={clothingItems}
-          />
+
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                />
+              }
+            ></Route>
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  weatherType={weatherData.type}
+                  clothingItems={clothingItems}
+                  handleCardClick={handleCardClick}
+                />
+              }
+            ></Route>
+          </Routes>
 
           <Footer />
         </div>
@@ -80,6 +105,7 @@ function App() {
         <AddItemModal
           isOpen={activeModal === "add-garment"}
           onClose={closeActiveModal}
+          onAddItemModalSumbit={handleAddItemModalSumbit}
         />
         <ItemModal
           activeModal={activeModal}
