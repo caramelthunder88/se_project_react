@@ -10,7 +10,7 @@ function ClothesSection({ weatherType, clothingItems, handleCardClick }) {
         <button className="clothessection__button">+ Add new</button>
       </div>
 
-      <ul className="cards__list">
+      <ul className="clothes-section__items">
         {clothingItems.map((item) => (
           <ItemCard key={item._id} item={item} onCardClick={handleCardClick} />
         ))}

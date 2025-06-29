@@ -161,3 +161,9 @@
 .modal__submit:hover {
   background-color: #00000099;
 }
+
+.modal__submit:disabled {
+  background-color: #0000004d;
+
+  cursor: not-allowed;
+}

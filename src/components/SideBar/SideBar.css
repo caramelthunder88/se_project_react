@@ -12,7 +12,7 @@
   margin-right: 116px;
 
   gap: 16px;
-  white-space: nowrap; /* Prevents username from wrapping */
+  white-space: nowrap;
 }
 
 .sidebar__avatar {

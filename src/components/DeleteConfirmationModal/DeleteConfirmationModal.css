@@ -1,0 +1,88 @@
+@font-face {
+  font-family: "GroteskBold";
+  src: url("../../vendor/CabinetGrotesk-Bold.otf") format("opentype");
+}
+
+.delete-modal {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.delete-modal__content {
+  width: 670px;
+  height: 280px;
+  padding: 24px;
+  background-color: white;
+  border-radius: 20px;
+  position: relative;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.delete-modal__close-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.modal__close-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  color: #0000004d;
+}
+
+.delete-modal__text {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: GroteskBold, sans-serif;
+  color: black;
+  margin: 0 0 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.delete-modal__text p {
+  margin: 0;
+}
+
+.delete-modal__button-group {
+  display: flex;
+  flex-direction: column;
+  font-family: GroteskBold, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  align-items: center;
+
+  justify-content: center;
+  gap: 24px;
+  margin: 0;
+}
+
+.delete-modal__cancel-button {
+  color: #000000;
+  background: transparent;
+  border: none;
+}
+
+.delete-modal__confirm-button {
+  color: #ff4d00;
+  background: transparent;
+  border: none;
+}
