@@ -1,4 +1,5 @@
 import "./ModalWithForm.css";
+import useModalClose from "../ModalClose/ModalClose";
 import closeIcon from "../../assets/close.png";
 
 function ModalWithForm({
@@ -10,6 +11,8 @@ function ModalWithForm({
   onSubmit,
   isValid,
 }) {
+  useModalClose(isOpen, onClose);
+
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__content">
