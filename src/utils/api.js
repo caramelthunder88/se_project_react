@@ -10,8 +10,9 @@ function request(url, options) {
 
 function getItems() {
   return request(`${baseUrl}/items`).then((data) =>
-    data.map((item) => ({
+    data.map((item, index) => ({
       ...item,
+      _id: item._id || item.id || `fallback-${index}`,
       link: item.imageUrl || item.link,
     }))
   );
@@ -24,6 +25,8 @@ function addItem({ name, imageUrl, weather }) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      _id: Date.now(),
+      id: Date.now(),
       name,
       weather,
       imageUrl,
