@@ -1,6 +1,6 @@
 import "./ItemModal.css";
 import "../Main/Main.css";
-import useModalClose from "../ModalClose/ModalClose";
+import useModalClose from "../../utils/ModalClose/ModalClose";
 import iconClose from "../../assets/close 2.png";
 
 function ItemModal({ activeModal, onClose, card, onDelete }) {
