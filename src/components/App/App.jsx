@@ -57,10 +57,11 @@ function App() {
     setActiveModal("");
   };
 
-  const handleAddItemModalSumbit = ({ name, imageUrl, weather }) => {
+  const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
     addItem({ name, imageUrl, weather })
       .then((newItem) => {
-        setClothingItems([newItem, ...clothingItems]);
+        setClothingItems((prevItems) => [newItem, ...prevItems]);
+        //setClothingItems([newItem, ...clothingItems]);
         closeActiveModal();
       })
       .catch((err) => console.error("Error adding item:", err));
@@ -138,7 +139,7 @@ function App() {
         <AddItemModal
           isOpen={activeModal === "add-garment"}
           onClose={closeActiveModal}
-          onAddItemModalSumbit={handleAddItemModalSumbit}
+          onAddItemModalSubmit={handleAddItemModalSubmit}
         />
         <ItemModal
           activeModal={activeModal}

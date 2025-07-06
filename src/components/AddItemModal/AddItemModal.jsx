@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import "./AddItemModal.css";
+
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 export default function AddItemModal({
   onClose,
   isOpen,
-  onAddItemModalSumbit,
+  onAddItemModalSubmit,
 }) {
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -35,7 +35,7 @@ export default function AddItemModal({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItemModalSumbit({ name, imageUrl, weather });
+    onAddItemModalSubmit({ name, imageUrl, weather });
   };
 
   return (
@@ -70,7 +70,7 @@ export default function AddItemModal({
         Image
         <input
           type="url"
-          name="link"
+          name="imageUrl"
           className="modal__input"
           id="imageUrl"
           placeholder="Image Url"

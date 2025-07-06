@@ -1,6 +1,6 @@
 const baseUrl = "http://localhost:3001";
 
-function checkResponse(res) {
+export function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 }
 
@@ -25,17 +25,19 @@ function addItem({ name, imageUrl, weather }) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      _id: Date.now(),
-      id: Date.now(),
       name,
       weather,
       imageUrl,
     }),
-  });
+  }).then((item) => ({
+    ...item,
+    _id: item._id || item.id || `fallback-${Date.now()}`,
+    link: item.imageUrl || item.link,
+  }));
 }
 
 function deleteItem(id) {
-  return fetch(`${baseUrl}/items/${id}`, {
+  return request(`${baseUrl}/items/${id}`, {
     method: "DELETE",
   });
 }
