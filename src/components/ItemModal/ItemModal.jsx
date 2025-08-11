@@ -3,27 +3,37 @@ import "../Main/Main.css";
 import useModalClose from "../../utils/ModalClose/ModalClose";
 import iconClose from "../../assets/close 2.png";
 
-function ItemModal({ activeModal, onClose, card, onDelete }) {
+function ItemModal({ activeModal, onClose, card = {}, onDelete, isOwner }) {
   const isOpen = activeModal === "preview";
   useModalClose(isOpen, onClose);
+  const imageSrc = card.imageUrl || card.link || "";
+  const title = card.name || "";
+  const weather = card.weather || "";
+
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__item_content modal__item_content_type_image">
         <button onClick={onClose} type="button" className="modal__item_close">
           <img src={iconClose} alt="Close" className="modal__item_close-icon" />
         </button>
-        <img src={card.link} alt="" className="modal__item_image" />
+        <img
+          src={imageSrc}
+          alt={title || "Item"}
+          className="modal__item_image"
+        />
         <div className="modal__item_footer">
           <div className="modal__item_header">
-            <h2 className="modal__item_caption">{card.name}</h2>
-            <button
-              className="modal__item_delete-button"
-              onClick={() => onDelete(card)}
-            >
-              Delete item
-            </button>
+            <h2 className="modal__item_caption">{title}</h2>
+            {isOwner && (
+              <button
+                className="modal__item_delete-button"
+                onClick={() => onDelete(card)}
+              >
+                Delete item
+              </button>
+            )}
           </div>
-          <p className="modal__item_weather">Weather: {card.weather}</p>
+          <p className="modal__item_weather">Weather: {weather}</p>
         </div>
       </div>
     </div>
