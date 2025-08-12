@@ -1,13 +1,21 @@
+import { useContext, useMemo } from "react";
 import "./ClothesSection.css";
-import { defaultClothingItems } from "../../utils/constants";
 import ItemCard from "../ItemCard/ItemCard";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function ClothesSection({
-  weatherType,
+export default function ClothesSection({
   clothingItems,
   handleCardClick,
   onAddClick,
 }) {
+  const currentUser = useContext(CurrentUserContext);
+
+  const myItems = useMemo(() => {
+    const me = currentUser?._id;
+    const arr = Array.isArray(clothingItems) ? clothingItems : [];
+    return me ? arr.filter((i) => i.owner === me) : [];
+  }, [clothingItems, currentUser?._id]);
+
   return (
     <div className="clothessection">
       <div className="clothessection__header">
@@ -17,13 +25,21 @@ function ClothesSection({
         </button>
       </div>
 
-      <ul className="clothes-section__items">
-        {clothingItems.map((item) => (
-          <ItemCard key={item._id} item={item} onCardClick={handleCardClick} />
-        ))}
-      </ul>
+      {myItems.length === 0 ? (
+        <p className="clothessection__empty">
+          You haven’t added any items yet.
+        </p>
+      ) : (
+        <ul className="clothes-section__items">
+          {myItems.map((item) => (
+            <ItemCard
+              key={item._id}
+              item={item}
+              onCardClick={handleCardClick}
+            />
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
-
-export default ClothesSection;

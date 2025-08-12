@@ -6,27 +6,42 @@ export default function EditProfileModal({ isOpen, onClose, onSubmit }) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
+  const [isSubmitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (isOpen && currentUser) {
       setName(currentUser.name || "");
       setAvatar(currentUser.avatar || "");
+      setSubmitting(false);
+      setError("");
     }
   }, [isOpen, currentUser]);
 
+  const isValid =
+    name.trim().length >= 2 && (!avatar || /^https?:\/\/.+/i.test(avatar));
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ name: name.trim(), avatar: avatar.trim() });
+    if (!isValid || isSubmitting) return;
+    setSubmitting(true);
+    setError("");
+
+    Promise.resolve(onSubmit({ name: name.trim(), avatar: avatar.trim() }))
+      .catch((err) => {
+        setError(err?.message || "Could not update profile. Try again.");
+      })
+      .finally(() => setSubmitting(false));
   };
 
   return (
     <ModalWithForm
       title="Edit profile"
-      buttonText="Save"
+      buttonText={isSubmitting ? "Saving..." : "Save"}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      isValid={name.trim().length >= 2}
+      isValid={isValid && !isSubmitting}
     >
       <label className="modal__label">
         Name
@@ -51,6 +66,12 @@ export default function EditProfileModal({ isOpen, onClose, onSubmit }) {
           className="modal__input"
         />
       </label>
+
+      {error && (
+        <div className="modal__error" style={{ marginTop: 6 }}>
+          {error}
+        </div>
+      )}
     </ModalWithForm>
   );
 }

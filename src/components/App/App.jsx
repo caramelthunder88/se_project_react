@@ -246,6 +246,7 @@ function App() {
                       handleCardClick={handleCardClick}
                       onAddClick={handleAddClick}
                       onEditProfile={() => setActiveModal("editProfile")}
+                      onSignOut={handleSignOut}
                     />
                   </ProtectedRoute>
                 }

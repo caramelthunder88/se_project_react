@@ -1,19 +1,50 @@
+import { useContext, useMemo } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./ItemCard.css";
 
-function ItemCard({ item, onCardClick }) {
-  const handleCardClick = () => {
-    onCardClick(item);
+function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
+  const currentUser = useContext(CurrentUserContext);
+
+  const handleCardClick = () => onCardClick(item);
+
+  const isLiked = useMemo(() => {
+    const likes = Array.isArray(item.likes) ? item.likes : [];
+    return currentUser?._id
+      ? likes.some((id) => id === currentUser._id)
+      : false;
+  }, [item.likes, currentUser?._id]);
+
+  const handleLike = (e) => {
+    e.stopPropagation();
+    if (!isLoggedIn) return;
+    onCardLike({ id: item._id, isLiked });
   };
 
+  const imageSrc = item.imageUrl || item.link;
+  const likeBtnClass = `card__like-button ${
+    isLiked ? "card__like-button_active" : ""
+  }`;
+
   return (
-    <li className="card">
+    <li className="card" onClick={handleCardClick}>
       <h2 className="card__name">{item.name}</h2>
+
       <img
-        onClick={handleCardClick}
         className="card__image"
-        src={item.link}
-        alt={item.name}
+        src={imageSrc}
+        alt={item.name || "Item"}
+        onError={(e) => (e.currentTarget.style.visibility = "hidden")}
       />
+
+      {isLoggedIn && (
+        <button
+          type="button"
+          className={likeBtnClass}
+          aria-pressed={isLiked}
+          title={isLiked ? "Unlike" : "Like"}
+          onClick={handleLike}
+        />
+      )}
     </li>
   );
 }
