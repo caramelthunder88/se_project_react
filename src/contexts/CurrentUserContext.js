@@ -1,2 +1,3 @@
 import { createContext } from "react";
-export default createContext(null);
+const CurrentUserContext = createContext(null);
+export default CurrentUserContext;

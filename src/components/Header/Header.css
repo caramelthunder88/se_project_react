@@ -57,3 +57,14 @@
   text-decoration: none;
   color: black;
 }
+
+.header__avatar_placeholder {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #eee;
+  color: #555;
+  font-weight: 600;
+}
