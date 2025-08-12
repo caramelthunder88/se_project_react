@@ -6,13 +6,13 @@ import avatar from "../../assets/Ellipse 18.png";
 function SideBar({ onEditProfile, onSignOut }) {
   const currentUser = useContext(CurrentUserContext);
   const name = currentUser?.name || "You";
-  const avatar = currentUser?.avatar;
+  const userAvatar = currentUser?.avatar;
   const initial = name.trim().charAt(0).toUpperCase();
 
   return (
     <div className="sidebar">
       <div className="sidebar__avatar">
-        {avatar ? (
+        {userAvatar ? (
           <img src={avatar} alt={name} />
         ) : (
           <div className="sidebar__avatar_placeholder">{initial}</div>
