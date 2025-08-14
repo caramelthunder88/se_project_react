@@ -8,9 +8,10 @@ const request = (url, options) => fetch(url, options).then(checkResponse);
 const unwrap = (payload) =>
   payload?.data ?? payload?.item ?? payload?.card ?? payload?.result ?? payload;
 
-const normalizeId = (x) => (typeof x === "string" ? x : x?._id);
+const normalizeId = (rawId) => (typeof rawId === "string" ? rawId : rawId?._id);
 
-const normalizeWeather = (v) => String(v ?? "").toLowerCase();
+const normalizeWeather = (weatherValue) =>
+  String(weatherValue ?? "").toLowerCase();
 
 const normalizeItem = (item, i) => {
   const it = item || {};

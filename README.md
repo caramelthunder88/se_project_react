@@ -15,3 +15,4 @@ This project is built with React and uses React Router for navigation and the Co
 ## Links
 
 - [Figma Design](https://www.figma.com/file/DTojSwldenF9UPKQZd6RRb/Sprint-10%3A-WTWR)
+  https://github.com/caramelthunder88/se_project_react

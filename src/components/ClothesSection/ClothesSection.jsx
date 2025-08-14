@@ -22,9 +22,12 @@ export default function ClothesSection({
     <div className="clothessection">
       <div className="clothessection__header">
         <p className="clothessection__title">Your Items</p>
-        <button className="clothessection__button" onClick={onAddClick}>
-          + Add new
-        </button>
+
+        {isLoggedIn && (
+          <button className="clothessection__button" onClick={onAddClick}>
+            + Add new
+          </button>
+        )}
       </div>
 
       {myItems.length === 0 ? (

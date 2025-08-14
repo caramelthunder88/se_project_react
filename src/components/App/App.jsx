@@ -39,7 +39,7 @@ function App() {
 
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  const [clothingItems, setClothingItems] = useState([]);
+  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
 
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [showConfirmModal, setShowConfirmModal] = useState(false);
@@ -131,13 +131,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log("About to fetch items...");
     api
       .getItems()
       .then((items) => {
-        console.log("Items received:", items);
-        console.log("Items type:", typeof items);
-        console.log("Is array:", Array.isArray(items));
         setClothingItems(items);
       })
       .catch((e) => {
@@ -260,8 +256,6 @@ function App() {
             activeModal={activeModal}
             card={selectedCard}
             onClose={closeActiveModal}
-            //onDelete={handleDeleteCard}
-
             onDelete={openConfirmationModal}
             isOwner={currentUser?._id === selectedCard?.owner}
           />
@@ -282,6 +276,7 @@ function App() {
             isOpen={activeModal === "register"}
             onClose={closeActiveModal}
             onSubmit={handleRegister}
+            onSwitchToLogin={() => setActiveModal("login")}
           />
           <EditProfileModal
             isOpen={activeModal === "editProfile"}

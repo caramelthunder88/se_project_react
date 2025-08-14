@@ -64,9 +64,9 @@ function Main({
           </p>
         ) : (
           <ul className="cards__list">
-            {filteredItems.slice(0, 12).map((item) => (
+            {filteredItems.slice(0, 12).map((item, index) => (
               <ItemCard
-                key={item._id || item.key}
+                key={item._id ?? item.id ?? item.key ?? `fallback-${index}`}
                 item={item}
                 onCardClick={handleCardClick}
                 onCardLike={onCardLike}
