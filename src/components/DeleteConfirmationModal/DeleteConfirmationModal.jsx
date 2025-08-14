@@ -6,21 +6,22 @@ function DeleteConfirmationModal({ isOpen, onClose, onConfirm }) {
   if (!isOpen) return null;
 
   return (
-    <div className="delete-modal modal_opened">
-      <div className="delete-modal__content">
-        <button onClick={onClose} className="delete-modal__close-button">
+    <div className="modal modal_opened">
+      <div className="modal__content modal__content--confirm">
+        <button onClick={onClose} className="modal__close">
           <img src={iconClose} alt="Close" className="modal__close-icon" />
         </button>
-        <div className="delete-modal__text">
+
+        <div className="modal__text">
           <p>Are you sure you want to delete this item?</p>
           <p>This action is irreversible.</p>
         </div>
 
-        <div className="delete-modal__button-group">
-          <button className="delete-modal__confirm-button" onClick={onConfirm}>
-            Yes, Delete Item
+        <div className="modal__actions">
+          <button className="modal__btn modal__btn_danger" onClick={onConfirm}>
+            Yes, delete item
           </button>
-          <button className="delete-modal__cancel-button" onClick={onClose}>
+          <button className="modal__btn modal__btn_link" onClick={onClose}>
             Cancel
           </button>
         </div>

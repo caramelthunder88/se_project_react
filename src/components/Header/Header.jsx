@@ -4,13 +4,21 @@ import "./Header.css";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import logo from "../../assets/wtwr.svg";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import fallbackAvatar from "../../assets/Ellipse 18.png";
 
 function Avatar({ name, avatar }) {
-  const initial = (name || "?").trim().charAt(0).toUpperCase();
-  return avatar ? (
-    <img src={avatar} alt={name || "User"} className="header__avatar" />
-  ) : (
-    <div className="header__avatar header__avatar_placeholder">{initial}</div>
+  const src = avatar && avatar.trim() ? avatar : fallbackAvatar;
+  return (
+    <img
+      src={src}
+      alt={name || "User"}
+      className="header__avatar"
+      onError={(e) => {
+        if (e.currentTarget.src !== fallbackAvatar) {
+          e.currentTarget.src = fallbackAvatar;
+        }
+      }}
+    />
   );
 }
 
@@ -54,23 +62,24 @@ export default function Header({
       </div>
 
       {isLoggedIn ? (
-        <>
-          <Link to="/profile" className="header__link">
-            <div className="header__user-container">
-              <p className="header__username">{currentUser?.name || "You"}</p>
-              <Avatar name={currentUser?.name} avatar={currentUser?.avatar} />
-            </div>
-          </Link>
-          <button className="header__link" onClick={onSignOut}>
-            Sign out
-          </button>
-        </>
+        <Link to="/profile" className="header__link" aria-label="Open profile">
+          <div className="header__user-container">
+            <p className="header__username">{currentUser?.name || "You"}</p>
+            <Avatar name={currentUser?.name} avatar={currentUser?.avatar} />
+          </div>
+        </Link>
       ) : (
         <div className="header__auth">
-          <button className="header__link" onClick={onOpenLogin}>
+          <button
+            className="header__link header__link--btn"
+            onClick={onOpenLogin}
+          >
             Log in
           </button>
-          <button className="header__link" onClick={onOpenRegister}>
+          <button
+            className="header__link header__link--btn"
+            onClick={onOpenRegister}
+          >
             Sign up
           </button>
         </div>

@@ -19,7 +19,6 @@ import {
   APIkey,
   defaultClothingItems,
 } from "../../utils/constants";
-//import { getItems, addItem, deleteItem } from "../../utils/api";
 
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
@@ -41,7 +40,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [clothingItems, setClothingItems] = useState([]);
-  //const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
@@ -103,15 +102,22 @@ function App() {
       .catch((err) => console.error("Error deleting item:", err));
   };
 
+  const isObjectId = (v) => typeof v === "string" && /^[a-f\d]{24}$/i.test(v);
+
   const handleCardLike = ({ id, isLiked }) => {
+    if (!isObjectId(id)) {
+      console.warn("Skipping like: not a Mongo id", id);
+      return;
+    }
     const token = localStorage.getItem("jwt");
     const action = isLiked ? api.removeCardLike : api.addCardLike;
+
     action(id, token)
-      .then((updated) =>
+      .then((serverCard) => {
         setClothingItems((prev) =>
-          prev.map((it) => (it._id === id ? updated : it))
-        )
-      )
+          prev.map((it) => (it._id === id ? { ...it, ...serverCard } : it))
+        );
+      })
       .catch((e) => console.error("like", e));
   };
 
@@ -123,19 +129,6 @@ function App() {
       })
       .catch(console.error);
   }, []);
-
-  //useEffect(() => {
-  //getItems()
-  //.then((data) => setClothingItems(data))
-  //.catch((err) => console.error("Error fetching clothing items:", err));
-  //}, []);
-
-  //useEffect(() => {
-  // api
-  //.getItems()
-  //.then((items) => setClothingItems(items))
-  //.catch((e) => console.error("getItems", e));
-  // }, []);
 
   useEffect(() => {
     console.log("About to fetch items...");
@@ -247,6 +240,8 @@ function App() {
                       onAddClick={handleAddClick}
                       onEditProfile={() => setActiveModal("editProfile")}
                       onSignOut={handleSignOut}
+                      onCardLike={handleCardLike}
+                      isLoggedIn={isLoggedIn}
                     />
                   </ProtectedRoute>
                 }
@@ -281,6 +276,7 @@ function App() {
             isOpen={activeModal === "login"}
             onClose={closeActiveModal}
             onSubmit={handleLogin}
+            onSwitchToRegister={() => setActiveModal("register")}
           />
           <RegisterModal
             isOpen={activeModal === "register"}

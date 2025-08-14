@@ -1,5 +1,7 @@
 import { useContext, useMemo } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import heartLiked from "../../assets/heart_liked.svg";
+import heartUnliked from "../../assets/heart_unliked.svg";
 import "./ItemCard.css";
 
 function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
@@ -27,7 +29,25 @@ function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
 
   return (
     <li className="card" onClick={handleCardClick}>
-      <h2 className="card__name">{item.name}</h2>
+      <div className="card__top">
+        <h2 className="card__name">{item.name}</h2>
+
+        {isLoggedIn && item._id && (
+          <button
+            type="button"
+            className={likeBtnClass}
+            aria-pressed={isLiked}
+            title={isLiked ? "Unlike" : "Like"}
+            onClick={handleLike}
+          >
+            <img
+              className="card__like-icon"
+              src={isLiked ? heartLiked : heartUnliked}
+              alt={isLiked ? "Unlike" : "Like"}
+            />
+          </button>
+        )}
+      </div>
 
       <img
         className="card__image"
@@ -35,16 +55,6 @@ function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
         alt={item.name || "Item"}
         onError={(e) => (e.currentTarget.style.visibility = "hidden")}
       />
-
-      {isLoggedIn && (
-        <button
-          type="button"
-          className={likeBtnClass}
-          aria-pressed={isLiked}
-          title={isLiked ? "Unlike" : "Like"}
-          onClick={handleLike}
-        />
-      )}
     </li>
   );
 }

@@ -8,7 +8,7 @@ function Main({
   weatherData,
   clothingItems,
   handleCardClick,
-  onCardClick,
+
   onCardLike,
   isLoggedIn,
 }) {
@@ -16,18 +16,33 @@ function Main({
 
   const temperature = weatherData?.temp?.[currentTemperatureUnit];
 
+  const normalizeWeather = (v) =>
+    String(v ?? "")
+      .trim()
+      .toLowerCase();
+
   const rawType =
     typeof weatherData?.type === "object"
       ? weatherData?.type?.[currentTemperatureUnit]
       : weatherData?.type;
 
-  const weatherType = (rawType ?? "").toString().toLowerCase();
+  const weatherType = normalizeWeather(rawType);
+  const KNOWN = new Set(["hot", "warm", "cold"]);
 
   const filteredItems = useMemo(() => {
     const arr = Array.isArray(clothingItems) ? clothingItems : [];
-    if (!weatherType) return [];
-    return arr.filter((i) => (i.weather || "").toLowerCase() === weatherType);
+    if (!arr.length) return [];
+
+    if (!KNOWN.has(weatherType)) return arr;
+    return arr.filter(
+      (i) =>
+        normalizeWeather(i.weather ?? i.weatherType ?? i.type) === weatherType
+    );
   }, [clothingItems, weatherType]);
+
+  console.log("clothingItems:", clothingItems);
+  console.log("weatherType:", weatherType);
+  console.log("filteredItems:", filteredItems);
 
   return (
     <main>
@@ -51,7 +66,7 @@ function Main({
           <ul className="cards__list">
             {filteredItems.slice(0, 12).map((item) => (
               <ItemCard
-                key={item._id}
+                key={item._id || item.key}
                 item={item}
                 onCardClick={handleCardClick}
                 onCardLike={onCardLike}

@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-export default function LoginModal({ isOpen, onClose, onSubmit }) {
+export default function LoginModal({
+  isOpen,
+  onClose,
+  onSubmit,
+  onSwitchToRegister = () => {},
+}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [touched, setTouched] = useState({ email: false, password: false });
@@ -39,7 +44,7 @@ export default function LoginModal({ isOpen, onClose, onSubmit }) {
     if (eMap.email || eMap.password || isSubmitting) return;
 
     setSubmitting(true);
-    // parent should return a Promise
+
     Promise.resolve(onSubmit({ email: email.trim(), password }))
       .catch((err) => {
         const msg =
@@ -59,6 +64,7 @@ export default function LoginModal({ isOpen, onClose, onSubmit }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       isValid={isValid && !isSubmitting}
+      variant="login"
     >
       <label className="modal__label">
         Email
@@ -66,7 +72,7 @@ export default function LoginModal({ isOpen, onClose, onSubmit }) {
           type="email"
           name="email"
           className="modal__input"
-          placeholder="you@example.com"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           onBlur={() => setTouched((t) => ({ ...t, email: true }))}
@@ -83,7 +89,7 @@ export default function LoginModal({ isOpen, onClose, onSubmit }) {
           type="password"
           name="password"
           className="modal__input"
-          placeholder="••••••••"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           onBlur={() => setTouched((t) => ({ ...t, password: true }))}
@@ -93,6 +99,15 @@ export default function LoginModal({ isOpen, onClose, onSubmit }) {
           <span className="modal__error">{errors.password}</span>
         )}
       </label>
+
+      <button
+        type="button"
+        className="modal__alt modal__alt--login"
+        onClick={onSwitchToRegister}
+        aria-label="Switch to Register"
+      >
+        or Register
+      </button>
 
       {errors.form && (
         <div className="modal__error" style={{ marginTop: 6 }}>

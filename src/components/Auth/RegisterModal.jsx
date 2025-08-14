@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-export default function RegisterModal({ isOpen, onClose, onSubmit }) {
+export default function RegisterModal({
+  isOpen,
+  onClose,
+  onSubmit,
+  onSwitchToLogin,
+}) {
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
   const [email, setEmail] = useState("");
@@ -78,19 +83,54 @@ export default function RegisterModal({ isOpen, onClose, onSubmit }) {
   return (
     <ModalWithForm
       title="Sign up"
-      buttonText={isSubmitting ? "Creating..." : "Sign up"}
+      buttonText={isSubmitting ? "Creating..." : "Next"}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
       isValid={isValid && !isSubmitting}
+      variant="register"
     >
       <label className="modal__label">
-        Name
+        Email*
+        <input
+          type="email"
+          name="email"
+          className="modal__input"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          onBlur={() => setTouched((t) => ({ ...t, email: true }))}
+          required
+        />
+        {touched.email && errors.email && (
+          <span className="modal__error">{errors.email}</span>
+        )}
+      </label>
+
+      <label className="modal__label">
+        Password*
+        <input
+          type="password"
+          name="password"
+          className="modal__input"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          onBlur={() => setTouched((t) => ({ ...t, password: true }))}
+          required
+        />
+        {touched.password && errors.password && (
+          <span className="modal__error">{errors.password}</span>
+        )}
+      </label>
+
+      <label className="modal__label">
+        Name*
         <input
           type="text"
           name="name"
           className="modal__input"
-          placeholder="Your name"
+          placeholder="Name"
           minLength={2}
           maxLength={30}
           value={name}
@@ -104,54 +144,30 @@ export default function RegisterModal({ isOpen, onClose, onSubmit }) {
       </label>
 
       <label className="modal__label">
-        Avatar URL (optional)
+        Avatar URL*
         <input
           type="url"
           name="avatar"
           className="modal__input"
-          placeholder="https://example.com/avatar.png"
+          placeholder="Avatar URL"
           value={avatar}
           onChange={(e) => setAvatar(e.target.value)}
           onBlur={() => setTouched((t) => ({ ...t, avatar: true }))}
+          required
         />
         {touched.avatar && errors.avatar && (
           <span className="modal__error">{errors.avatar}</span>
         )}
       </label>
 
-      <label className="modal__label">
-        Email
-        <input
-          type="email"
-          name="email"
-          className="modal__input"
-          placeholder="you@example.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          onBlur={() => setTouched((t) => ({ ...t, email: true }))}
-          required
-        />
-        {touched.email && errors.email && (
-          <span className="modal__error">{errors.email}</span>
-        )}
-      </label>
-
-      <label className="modal__label">
-        Password
-        <input
-          type="password"
-          name="password"
-          className="modal__input"
-          placeholder="Create a password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          onBlur={() => setTouched((t) => ({ ...t, password: true }))}
-          required
-        />
-        {touched.password && errors.password && (
-          <span className="modal__error">{errors.password}</span>
-        )}
-      </label>
+      <button
+        type="button"
+        className="modal__alt modal__alt--register"
+        onClick={onSwitchToLogin}
+        aria-label="Switch to Log in"
+      >
+        or Log in
+      </button>
 
       {errors.form && (
         <div className="modal__error" style={{ marginTop: 6 }}>

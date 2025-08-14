@@ -14,6 +14,7 @@
   justify-content: center;
   align-items: center;
   visibility: hidden;
+  z-index: 1000;
   opacity: 0;
   transition: visibility 0.3s, opacity 0.3s;
 }
@@ -44,6 +45,7 @@
   font-size: 16px;
   font-weight: 700;
   white-space: nowrap;
+  line-height: 20px;
 }
 
 .modal__close {
@@ -166,4 +168,295 @@
   background-color: #0000004d;
 
   cursor: not-allowed;
+}
+
+.modal--login .modal__content {
+  width: 496px;
+  height: 304px;
+  max-width: 496px;
+  border-radius: 20px;
+}
+
+.modal--register .modal__content {
+  width: 496px;
+  height: 456px;
+  max-width: 496px;
+  border-radius: 20px;
+}
+
+.modal--login .modal__label + .modal__label,
+.modal--register .modal__label + .modal__label {
+  margin-top: 24px;
+}
+
+.modal__alt {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-family: "Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #7a7a7a;
+  cursor: pointer;
+}
+
+.modal--login .modal__alt {
+  position: absolute;
+  left: calc(28px + 124px + 12px);
+  bottom: 36px;
+}
+
+.modal__alt:hover {
+  color: #000;
+}
+
+.modal__close-icon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.6;
+}
+.modal__close:hover .modal__close-icon {
+  opacity: 1;
+}
+
+.modal--login .modal__form,
+.modal--register .modal__form {
+  padding-top: 72px;
+}
+
+.modal--login .modal__content {
+  width: 496px;
+  height: 304px;
+  border-radius: 20px;
+}
+.modal--register .modal__content {
+  width: 496px;
+  height: 456px;
+  border-radius: 20px;
+}
+.modal--add .modal__content {
+  width: 496px;
+  height: 304px;
+  border-radius: 20px;
+}
+.modal--profile .modal__content {
+  width: 496px;
+  height: 304px;
+  border-radius: 20px;
+}
+
+.modal--confirm .modal__content {
+  width: 420px;
+  padding: 28px;
+  border-radius: 16px;
+}
+
+.modal--login .modal__label + .modal__label,
+.modal--register .modal__label + .modal__label,
+.modal--add .modal__label + .modal__label,
+.modal--profile .modal__label + .modal__label {
+  margin-top: 24px;
+}
+
+.modal--login .modal__form,
+.modal--register .modal__form,
+.modal--add .modal__form,
+.modal--profile .modal__form {
+  padding-top: calc(28px + 20px + 24px);
+}
+
+.modal--add .modal__radio-buttons_type_garment {
+  margin: 24px 0 32px;
+}
+
+.modal--login .modal__submit,
+.modal--add .modal__submit,
+.modal--profile .modal__submit {
+  position: absolute;
+  left: 28px;
+  bottom: 36px;
+}
+
+.modal--register .modal__submit {
+  position: static;
+  margin-top: 32px;
+  align-self: flex-start;
+}
+
+.modal--confirm .modal__text {
+  text-align: center;
+  font-family: "Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #000;
+}
+.modal--confirm .modal__text p {
+  margin: 0;
+}
+.modal--confirm .modal__text p + p {
+  margin-top: 4px;
+}
+
+.modal--confirm .modal__actions {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.modal__btn {
+  font-family: "Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  background: #000;
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+.modal__btn_danger {
+  background: transparent;
+  color: #ff4d00;
+}
+.modal__btn_link {
+  background: transparent;
+  color: #7a7a7a;
+}
+
+.modal__close-icon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.6;
+}
+.modal__close:hover .modal__close-icon {
+  opacity: 1;
+}
+
+.modal__alt {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-family: "Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #7a7a7a;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  line-height: 36px;
+  white-space: nowrap;
+}
+.modal__alt:hover {
+  color: #000;
+}
+
+.modal__submit {
+  width: 124px;
+  height: 36px;
+  line-height: 36px;
+}
+
+.modal__content--register {
+  padding-bottom: 104px;
+}
+
+.modal__form--register {
+  padding-top: calc(28px + 20px + 24px);
+}
+.modal__form--register .modal__label + .modal__label {
+  margin-top: 24px;
+}
+
+.modal--register .modal__submit,
+.modal__submit--register {
+  position: absolute;
+  left: 28px;
+  bottom: 36px;
+  width: 73px;
+  height: 36px;
+  line-height: 36px;
+  white-space: nowrap;
+}
+
+.modal--register .modal__alt,
+.modal__alt--register {
+  position: absolute;
+  left: calc(28px + 73px + 12px);
+  bottom: 36px;
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  line-height: 36px;
+  white-space: nowrap;
+}
+
+.modal__content--login {
+  padding-bottom: 104px;
+}
+
+.modal__form--login .modal__label + .modal__label {
+  margin-top: 24px;
+}
+
+.modal__submit--login {
+  position: absolute;
+  left: 28px;
+  bottom: 36px;
+  width: 73px;
+  height: 36px;
+  line-height: 36px;
+  white-space: nowrap;
+}
+
+.modal__alt--login {
+  position: absolute;
+  left: calc(28px + 73px + 12px);
+  bottom: 36px;
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  line-height: 36px;
+  white-space: nowrap;
+}
+
+.modal__alt--login {
+  position: absolute;
+  left: calc(28px + 73px + 12px);
+  bottom: 36px;
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  line-height: 36px;
+  white-space: nowrap;
+}
+
+.modal__form--login .modal__label {
+  margin-top: 0;
+}
+.modal__form--login .modal__label + .modal__label {
+  margin-top: 24px;
+}
+
+.modal__content--edit-profile {
+  width: 496px;
+  height: 304px;
+  border-radius: 20px;
+  padding: 0 28px;
+}
+
+.modal__form--edit-profile {
+  padding-top: calc(24px + 20px + 24px);
+}
+
+.modal__content--edit-profile .modal__label + .modal__label {
+  margin-top: 24px;
+}
+
+.modal__submit--edit-profile {
+  position: absolute;
+  left: 28px;
+  bottom: 36px;
 }

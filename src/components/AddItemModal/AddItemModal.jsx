@@ -46,6 +46,7 @@ export default function AddItemModal({
       onClose={onClose}
       onSubmit={handleSubmit}
       isValid={isValid}
+      variant="add-item"
     >
       <label htmlFor="name" className="modal__label modal__label_type_name">
         Name
