@@ -145,7 +145,10 @@ function App() {
     auth
       .signup(data)
       .then(() => handleLogin({ email: data.email, password: data.password }))
-      .then(() => setActiveModal(""));
+      .then(() => closeActiveModal())
+      .catch((err) => {
+        console.error("[auth] Signup failed:", err);
+      });
 
   const handleLogin = ({ email, password }) =>
     auth
@@ -158,7 +161,12 @@ function App() {
       .then((user) => {
         setCurrentUser(user);
         setIsLoggedIn(true);
-        setActiveModal("");
+        closeActiveModal("");
+      })
+      .catch((err) => {
+        console.error("[auth] Login failed:", err);
+
+        localStorage.removeItem("jwt");
       });
 
   const handleSignOut = () => {
@@ -229,9 +237,7 @@ function App() {
                   <ProtectedRoute isLoggedIn={isLoggedIn}>
                     <Profile
                       weatherType={weatherData.type}
-                      clothingItems={clothingItems.filter(
-                        (i) => i.owner === currentUser?._id
-                      )}
+                      clothingItems={clothingItems}
                       handleCardClick={handleCardClick}
                       onAddClick={handleAddClick}
                       onEditProfile={() => setActiveModal("editProfile")}
@@ -257,7 +263,6 @@ function App() {
             card={selectedCard}
             onClose={closeActiveModal}
             onDelete={openConfirmationModal}
-            isOwner={currentUser?._id === selectedCard?.owner}
           />
 
           <DeleteConfirmationModal
